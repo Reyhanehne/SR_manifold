@@ -1,39 +1,24 @@
 import numpy as np
-from utils import unpickle
-from config import data_directory
+from PIL import Image
+from  config import cfg
+import os
+#from scipy import misc
+#from skimage.transform import rescale
 
-meta_data_dict = unpickle(data_directory + "/batches.meta")
-cifar_label_names = meta_data_dict[b'label_names']
-cifar_label_names_array = np.array(cifar_label_names)
-print (cifar_label_names_array)
-cifar_test_data_dict = unpickle(data_directory + "/test_batch")
-#print (cifar_test_data_dict)
-cifar_test_data = cifar_test_data_dict[b'data']
-#python3.6 data.py
-#print (cifar_test_data)
-cifar_test_data = cifar_test_data.reshape(len(cifar_test_data),3,32,32).transpose(0, 2, 3, 1).astype(np.float32)
-print (cifar_test_data.shape)
-cifar_test_filenames = cifar_test_data_dict[b'filenames']
-cifar_test_labels = cifar_test_data_dict[b'labels']
-#print (cifar_test_data_dict)
-#print (cifar_test_data.shape)
-cifar_train_data = None
-cifar_train_filenames = []
-cifar_train_labels = []
-for i in range(1,6):
-    cifar_train_data_dict = unpickle(data_directory + "/data_batch_{}".format(i))
-    if i == 1:
-        cifar_train_data = cifar_train_data_dict[b'data']
-    else:
-        cifar_train_data = np.vstack((cifar_train_data, cifar_train_data_dict[b'data']))
-    #cifar_train_filenames += cifar_train_data_dict[b'filenames']
-    cifar_train_labels += cifar_train_data_dict[b'labels']
-cifar_train_data = cifar_train_data.reshape((len(cifar_train_data), 3, 32, 32))
-'''
-    cifar_train_data = cifar_train_data_dict[b'data']
-    cifar_train_data = cifar_train_data.reshape(len(cifar_train_data), 3, 32, 32)'''
+def rgb2gray(rgb):
+    return np.dot(rgb[...,:3], [0.299, 0.587, 0.114])
+def data_train_1():
+    images = []
+    for filename in os.listdir(cfg.DATA_SETS_DIR):
+        print(filename)
+        img = Image.open(os.path.join(cfg.DATA_SETS_DIR, filename))
+        #for i in range(batch_size):
+        #img = Image.open(cfg.DATA_SETS_DIR + str(i).zfill(2) + '.jpg')
+        lr_img = np.array(img)
 
-print (cifar_train_data.shape)
-'''print (cifar_train_data)
-print (len(cifar_train_data_dict))'''
+        image = rgb2gray(lr_img)/256
+        images.append(image)
+        #img = img.save(cfg.DATA_SETS_DIR + str(i).zfill(2) + '.jpg')
+    images = np.array(images).reshape(-1,32,32)
 
+    return images
