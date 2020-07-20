@@ -18,20 +18,22 @@ from easydict import EasyDict as edict
 
 __C = edict()
 cfg = __C
-__C.DATA_SETS_TYPE='cifar-10'
+#__C.DATA_SETS_TYPE='cifar-10'
+#__C.DATA_SETS_TYPE='DIV2K_train_HR'
+__C.DATA_SETS_TYPE='data3'
 
 # Root directory of project
 __C.ROOT_DIR = osp.abspath(osp.join(osp.dirname(__file__), '..'))
-__C.DATA_SETS_DIR=osp.join(__C.ROOT_DIR, 'data/')
+__C.DATA_SETS_DIR=osp.join(__C.ROOT_DIR, 'data3/')
 
 __C.CHECKPOINT_DIR=osp.join(__C.ROOT_DIR,'checkpoint')
 __C.LOG_DIR=osp.join(__C.ROOT_DIR,'log')
 
 #__C.num_class = 10
-__C.num_out = 3321
+__C.num_out = 120
 __C.image_size = [32,32,1]
 __C.img_channels = 1
-__C.degree = 80
+__C.degree = 7
 __C.rgb_mean = [0.0,0.0,0.0]
 
 
