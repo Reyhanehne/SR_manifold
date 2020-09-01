@@ -69,44 +69,7 @@ def VGG16_1(input_layer, rgb_mean, num_out):
     pool5_flat = tf.reshape(pool5, [-1, flattened_shape], name="flatten")
     fc1 = tf.reshape(fully_connected_f(pool5_flat, name='fc',n_out=cfg.num_out),[-1, cfg.num_out, 1, 1])  # *100
     fc1 = fc1 - tf.constant(one)*tf.reshape(fc1[:,0,:,:],[-1,1,1,1])+tf.constant(one)
-    '''
-    fc2 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc3 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
     
-    fc4 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc5 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-
-    fc6 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc7 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc8 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc9 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc10 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-
-    fc11 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc12 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc13 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc14 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc15 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc16 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-
-    fc17 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc18 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc19 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc20 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100    fc1 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, 15, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-
-    fc21 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc22 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc23 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc24 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc25 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc26 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc27 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc28 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc29 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc30 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc31 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    fc32 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    '''
 
     # return [fc1,fc2,fc3,fc4,fc5,fc6,fc7,fc8,fc9,fc10,fc11,fc12,fc13,fc14,fc15,fc16,fc17,fc18,fc19,fc20,fc21,fc22,fc23,fc24,fc25,fc26,fc27,fc28,fc29,fc30,fc31,fc32]
     return [fc1]
