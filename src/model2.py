@@ -112,49 +112,6 @@ def VGG16_1(input_layer, rgb_mean, num_out):
     return [fc1]
 
 
-'''
-def VGG16_2(input_layer, rgb_mean, num_out):
-    input_layer = tf.reshape(input_layer, [-1, 32, 32, 1])
-    #input_layer = tf.image.rgb_to_grayscale(input_layer, name=None)
-    # define image mean
-    #if rgb_mean is None:
-    #    rgb_mean = np.array([116.779, 123.68, 103.939], dtype=np.float32)
-    #mu = tf.constant(rgb_mean, name="rgb_mean")
-    #input_layer = tf.subtract(tf.cast(input_layer, tf.float32), tf.cast(mu, tf.float32), name="input_mean_centered")
-    # block 1
-    conv1_1 = tf.layers.conv2d(inputs=input_layer, filters=64, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_1_1')
-    conv1_2 = tf.layers.conv2d(inputs=conv1_1, filters=64, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_1_2')
-    pool1 = tf.layers.max_pooling2d(inputs=conv1_2, pool_size=[2, 2], strides=2)
-
-    #block 2
-    conv2_1 = tf.layers.conv2d(inputs=pool1, filters=128, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_2_1')
-    conv2_2 = tf.layers.conv2d(inputs=conv2_1, filters=128, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_2_2')
-    pool2 = tf.layers.max_pooling2d(inputs=conv2_2, pool_size=[2, 2], strides=2)
-
-    #block 3
-    conv3_1 = tf.layers.conv2d(inputs=pool2, filters=256, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_3_1')
-    conv3_2 = tf.layers.conv2d(inputs=conv3_1, filters=256, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_3_2')
-    conv3_3 = tf.layers.conv2d(inputs=conv3_2, filters=256, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_3_3')
-    pool3 = tf.layers.max_pooling2d(inputs=conv3_3, pool_size=[2, 2], strides=2)
-
-    #block 4
-    conv4_1 = tf.layers.conv2d(inputs=pool3, filters=512, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_4_1')
-    conv4_2 = tf.layers.conv2d(inputs=conv4_1, filters=512, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_4_2')
-    conv4_3 = tf.layers.conv2d(inputs=conv4_2, filters=512, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_4_3')
-    pool4 = tf.layers.max_pooling2d(inputs=conv4_3, pool_size=[2, 2], strides=2)
-
-    #block 5
-    conv5_1 = tf.layers.conv2d(inputs=pool4, filters=512, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_5_1')
-    conv5_2 = tf.layers.conv2d(inputs=conv5_1, filters=512, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_5_2')
-    conv5_3 = tf.layers.conv2d(inputs=conv5_2, filters=512, kernel_size=[3, 3], padding="same", activation=tf.nn.relu, name='VGG_2_5_3')
-    pool5 = tf.layers.max_pooling2d(inputs=conv5_3, pool_size=[2, 2], strides=2)
-
-    #block 6
-    flattened_shape = np.prod([s.value for s in pool5.get_shape()[1:]])
-    pool5_flat = tf.reshape(pool5, [-1, flattened_shape], name="flatten")
-    fc1 = tf.reshape(tf.contrib.layers.fully_connected(pool5_flat, cfg.num_out, activation_fn=None), [-1, cfg.num_out, 1, 1])#*100
-    return fc1
-'''
 
 
 def polyval2d_loss(image, weight, degree):
